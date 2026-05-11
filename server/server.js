@@ -10,14 +10,13 @@ app.use(cors())
 app.use("/movie",movieRoute)  //movie route
 app.use("/user",userRoute)      //user route
 const PORT=process.env.PORT||8081
-app.listen(PORT,()=>{
-    console.log("Server started")
-    try{
-        connectDatabase()
-        console.log("Db Connected")
-
-    }catch(err){
-        console.log("err",err)
-    }
-   
-})
+connectDatabase()
+    .then(()=>{
+        app.listen(PORT,()=>{
+            console.log(`Server started on port ${PORT}`)
+        })
+    })
+    .catch((err)=>{
+        console.log("Database connection failed",err.message)
+        process.exit(1)
+    })

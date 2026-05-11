@@ -12,7 +12,7 @@ userRoute.post("/login",async(req,res)=>{
   if(email&&password){
         try{
             const userData=await UserModel.findOne({email});
-            if(userData?.name.length>0){
+            if(userData){
                 //user password
                 //hashed password
                 const isMatch=await bcrypt.compare(password,userData.password);
@@ -21,7 +21,7 @@ userRoute.post("/login",async(req,res)=>{
 
                     //token 
                     const token=jwt.sign({"userid":userData._id},process.env.JWT)
-                    res.status(200).send({msg:"Login Success",token:token,role:userData.role})
+                    res.status(200).send({msg:"Login Success",token:token,role:userData.memberType})
 
                 }else{
                     res.status(400).send({"msg":"Wrong Password"})
@@ -48,12 +48,16 @@ userRoute.post("/signup",async(req,res)=>{
 
     if(name&&email&&password){
         try{   
+            const existingUser=await UserModel.findOne({email})
+            if(existingUser){
+                return res.status(409).send({msg:"Account already exists"})
+            }
             const hashed_password=await bcrypt.hash(password,12)
             const newUser=await UserModel({...req.body,password:hashed_password})
 
             await newUser.save();
 
-            res.status(200).send({"msg":"Signup Successfull"})
+            res.status(201).send({"msg":"Signup Successful"})
         }catch(err){
             res.status(500).send({msg:err.message})
         }
