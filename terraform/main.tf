@@ -93,7 +93,7 @@ resource "aws_instance" "app" {
   user_data = <<-EOF
     #!/bin/bash
     apt-get update -y
-    apt-get install -y docker.io docker-compose-plugin
+    apt-get install -y docker.io docker-compose
     systemctl start docker
     systemctl enable docker
 
@@ -122,7 +122,7 @@ resource "aws_instance" "app" {
     COMPOSE
 
     cd /opt/netflix-clone
-    docker compose up -d
+    docker-compose up -d
   EOF
 
   tags = {

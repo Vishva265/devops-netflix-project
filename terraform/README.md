@@ -85,8 +85,8 @@ Then SSH into EC2 and restart:
 ```powershell
 ssh -i your-key.pem ubuntu@YOUR_EC2_PUBLIC_IP
 cd /opt/netflix-clone
-sudo docker compose pull
-sudo docker compose up -d
+sudo docker-compose pull
+sudo docker-compose up -d
 ```
 
 ## Destroy When Finished
@@ -96,4 +96,3 @@ To avoid charges:
 ```powershell
 terraform destroy
 ```
-
