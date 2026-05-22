@@ -1,6 +1,6 @@
 import { ADDLIST, ALLLIST, GETDATA, LOGINSUCCESS, REMOVELIST } from "./actionType"
 
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8081";
+const API_URL = process.env.REACT_APP_API_URL ?? "";
 
 export const getData=()=>{
     return async(dispatch)=>{
