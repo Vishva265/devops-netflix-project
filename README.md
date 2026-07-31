@@ -1,7 +1,7 @@
 
 <h1 align="center">NETFLIX CLONE</h1>
 
-<h3 align="center">It's Full Stack Netflix Clone </h3>
+<h3 align="center">It's Full Stack Netflix Clone By Vishva</h3>
 
 <br />
 
